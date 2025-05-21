@@ -11,6 +11,7 @@ pub struct ThreadPool {
 }
 
 pub struct Worker {
+    #[allow(dead_code)]
     id: usize,
     thread: Option<thread::JoinHandle<()>>
 }
@@ -45,6 +46,7 @@ impl Drop for ThreadPool {
         drop(self.sender.take());
 
         for worker in &mut self.workers {
+            #[cfg(trace)]
             eprintln!("Shutting down worker {}", worker.id);
 
             if let Some(thread) = worker.thread.take() {
@@ -65,6 +67,7 @@ impl  Worker {
 
             match message {
                 Ok(job) => {
+                    #[cfg(trace)]
                     eprintln!("Worker {id} got a job; executing.");
 
                     job();
