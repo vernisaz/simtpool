@@ -1,5 +1,5 @@
 crate  =simtpool
-main=lib
+crate main=lib
 dep_crates=[]
 comp opts=[]
 # comment above and uncomment below for trace
