@@ -1,5 +1,6 @@
 crate  =simtpool
 crate main=lib
+crate_src=.
 dep_crates=[]
 comp opts=[]
 # comment above and uncomment below for trace
