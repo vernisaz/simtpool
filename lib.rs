@@ -49,11 +49,8 @@ impl Drop for ThreadPool {
             #[cfg(trace)]
             eprintln!("Shutting down worker {}", worker.id);
 
-            if let Some(thread) = worker.thread.take() {
-                match thread.join() {
-                    Err(e) => eprintln!{"Thread join error: {e:?}"},
-                    _ => ()
-                }
+            if let Some(thread) = worker.thread.take() && let Err(e) = thread.join() { 
+                eprintln!{"Thread join error: {e:?}"} 
             }
         }
     }
@@ -79,6 +76,6 @@ impl  Worker {
             }
         }).ok();
 
-        Worker { id, thread: thread }
+        Worker { id, thread }
     }
 }
