@@ -69,8 +69,9 @@ impl  Worker {
 
                     job();
                 }
-                Err(_) => {
-                    eprintln!("Worker {id} disconnected; shutting down.");
+                Err(err) => {
+                    eprintln!("Worker {id} disconnected, because {err}; shutting down.");
+                    // recosider to keep the thread working
                     break;
                 }
             }
