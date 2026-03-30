@@ -6,6 +6,7 @@ use std::{
 type Job = Box<dyn FnOnce() + Send + 'static>;
 
 pub struct ThreadPool {
+    // TODO: add a thread periodically scans 'workers' for a dead thread and replace it with a new one
     workers: Vec<Worker>,
     sender: Option<mpsc::Sender<Job>>,
 }
